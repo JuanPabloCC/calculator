@@ -33,3 +33,7 @@ function operate(num1, num2, operator) {
             return "Not a valid operator!"
     }
 }
+
+let display;
+
+calcBtnPanel = document.querySelector("#calc-btn-panel");
