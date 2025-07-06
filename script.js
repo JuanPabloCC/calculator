@@ -14,10 +14,6 @@ function divide(num1, num2) {
     return num1 / num2
 }
 
-let num1;
-let num2;
-let operator;
-
 function operate(num1, num2, operator) {
 
     switch(operator) {
@@ -34,6 +30,10 @@ function operate(num1, num2, operator) {
     }
 }
 
+let num1;
+let num2;
+let operator;
 let display;
 
-calcBtnPanel = document.querySelector("#calc-btn-panel");
+
+
