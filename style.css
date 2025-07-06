@@ -26,8 +26,9 @@ button {
     border-radius: 5px 5px 0px 0px;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: right;
     height: 75px;
+    padding: 5px;
 }
 
 #calc-btn-panel {
