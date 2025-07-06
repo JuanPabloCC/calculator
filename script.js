@@ -59,5 +59,5 @@ let digitButtons = document.querySelectorAll(".digit");
 let operatorButtons = document.querySelectorAll(".operator");
 
 digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
-
+operatorButtons.forEach(item => item.addEventListener("click", function (e){operationSelection(e)}));
 
