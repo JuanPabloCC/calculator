@@ -43,4 +43,5 @@ let display = document.querySelector("#calc-display-text");
 let displayText = display.textContent;
 let digitButtons = document.querySelectorAll(".digit");
 
+digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
 
