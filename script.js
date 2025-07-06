@@ -30,12 +30,17 @@ function operate(num1, num2, operator) {
     }
 }
 
+function updateDisplayText(e) {
+    let digitButtonText = e.target.textContent;
+    displayText += digitButtonText;
+    display.textContent = displayText;
+}
+
 let num1;
 let num2;
 let operator;
 let display = document.querySelector("#calc-display-text");
 let displayText = display.textContent;
 let digitButtons = document.querySelectorAll(".digit");
-
 
 
