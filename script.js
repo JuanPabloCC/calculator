@@ -30,10 +30,11 @@ function operate(num1, num2, operator) {
     }
 }
 
+
+
 let num1;
 let num2;
 let operator;
-let display;
-
+let display = document.querySelector("#calc-display-text");
 let digitButtons = document.querySelectorAll(".digit");
 
