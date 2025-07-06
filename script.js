@@ -48,11 +48,15 @@ function operationSelection(e) {
     // aquí vamos a guardar cuál es el operador
     operator = e.target.textContent;
     display.textContent = display.textContent+operator;
+    num1Selected = true;
+    operatorSelected = true;
 }
 
 let num1;
 let num2;
 let operator;
+let num1Selected = false;
+let operatorSelected = false;
 let display = document.querySelector("#calc-display-text");
 let displayText = display.textContent;
 let digitButtons = document.querySelectorAll(".digit");
