@@ -32,6 +32,9 @@ function operate(num1, num2, operator) {
 
 function updateDisplayText(e) {
     let digitButtonText = e.target.textContent;
+    if (displayText === "0"){
+        displayText = "";
+    }
     displayText += digitButtonText;
     display.textContent = displayText;
 }
