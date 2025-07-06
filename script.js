@@ -35,5 +35,5 @@ let num2;
 let operator;
 let display;
 
-
+let digitButtons = document.querySelectorAll(".digit");
 
