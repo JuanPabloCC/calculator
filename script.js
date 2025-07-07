@@ -49,6 +49,10 @@ function operationSelection(e) {
     operatorSelected = true;
 }
 
+function equal () {
+    console.log(num1);
+}
+
 let num1;
 let num2;
 let operator;
