@@ -58,6 +58,7 @@ let display = document.querySelector("#calc-display-text");
 let displayText = display.textContent;
 let digitButtons = document.querySelectorAll(".digit");
 let operatorButtons = document.querySelectorAll(".operator");
+let equalButton = document.querySelector("#btn-equal");
 let clearButton = document.querySelector("#btn-clear");
 
 digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
