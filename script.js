@@ -37,7 +37,6 @@ function updateDisplayText(e) {
     }
     displayText += digitButtonText;
     display.textContent = displayText;
-    console.log(displayText);
 }
 
 function operationSelection(e) {
@@ -51,6 +50,13 @@ function operationSelection(e) {
 
 function equal () {
     console.log(num1);
+    console.log(operator);
+    num2 = +displayText.split(operator)[1];
+    console.log(num2);
+    result = operate(num1, num2, operator);
+    console.log(result);
+    displayText = result;
+    display.textContent = displayText;
 }
 
 let num1;
@@ -67,4 +73,5 @@ let clearButton = document.querySelector("#btn-clear");
 
 digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
 operatorButtons.forEach(item => item.addEventListener("click", function (e){operationSelection(e)}));
+equalButton.addEventListener("click", equal);
 
