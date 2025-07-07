@@ -59,6 +59,16 @@ function equal () {
     display.textContent = displayText;
 }
 
+function clear () {
+    displayText= "0";
+    display.textContent = displayText;
+    num1=undefined;
+    num2=undefined;
+    operator=undefined;
+    num1Selected=false;
+    operatorSelected=false;
+}
+
 let num1;
 let num2;
 let operator;
