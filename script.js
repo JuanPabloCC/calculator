@@ -37,17 +37,14 @@ function updateDisplayText(e) {
     }
     displayText += digitButtonText;
     display.textContent = displayText;
+    console.log(displayText);
 }
 
 function operationSelection(e) {
-    // vamos a asumir que solamente tenemos dos números en los cuales queremos operar
-    // que es lo mismo que decir que solamente haremos una operación en cada calculo
-    // esto quiere decir que cuando se presiona uno de los botones de operador
-    // el número que esté en el display justo antes de eso, será el primer número de la operación
     num1 = +display.textContent;
-    // aquí vamos a guardar cuál es el operador
     operator = e.target.textContent;
-    display.textContent = display.textContent+operator;
+    displayText += operator;
+    display.textContent = displayText;
     num1Selected = true;
     operatorSelected = true;
 }
