@@ -32,62 +32,63 @@ function operate(num1, num2, operator) {
 
 function updateDisplayText(e) {
     let digitButtonText = e.target.textContent;
-    if (displayText === "0"){
-        displayText = "";
-    }
     displayText += digitButtonText;
-    display.textContent = displayText;
-}
-
-function operationSelection(e) {
-    operator = e.target.textContent;
-    if (displayText.toString().split(operator).length === 1) {
-        num1 = +display.textContent;
-    }
-
-    else if (displayText.toString().split(operator).length > 1) {
-        num1 = +displayText.split(operator)[0];
-        num2 = +displayText.split(operator)[1];
-        result = operate(num1, num2, operator);
-        displayText = result;
-        display.textContent = displayText;
-    }
-
-    displayText += operator;
-    display.textContent = displayText;
-    num1Selected = true;
-    operatorSelected = true;
-}
-
-function equal () {
-    num2 = +displayText.split(operator)[1];
-    result = operate(num1, num2, operator);
-    displayText = result;
+    num += digitButtonText;
     display.textContent = displayText;
 }
 
 function clear () {
-    displayText= "0";
-    display.textContent = displayText;
-    num1=undefined;
-    num2=undefined;
-    operator=undefined;
-    num1Selected=false;
-    operatorSelected=false;
+    display.textContent = "";
+    displayText = "";
+    num = "";
+    numHistory = [];
 }
 
+function equal () {
+    numHistory.push(+display.textContent);
+    num1 = numHistory[0];
+    num2 = numHistory[2];
+    operator = numHistory[1];
+    result = operate(num1, num2, operator);
+    num = result;
+    numHistory = [];
+    display.textContent = result;
+    displayText= "";
+    console.log(numHistory);
+}
+
+function operationSelection(e) {
+    
+    numHistory.push(+num);
+    num = "";
+
+    if (numHistory.length === 3) {
+        num1 = numHistory[0];
+        num2 = numHistory[2];
+        operator = numHistory[1];
+        result = operate(num1, num2, operator);
+        numHistory = [];
+        numHistory.push(result);
+    }
+    numHistory.push(e.target.textContent);
+    display.textContent = numHistory[0];
+    displayText= "";
+    console.log(numHistory);
+}
+
+let numHistory = [];
+let num = "";
+let result;
 let num1;
 let num2;
 let operator;
-let num1Selected = false;
-let operatorSelected = false;
 let display = document.querySelector("#calc-display-text");
 let displayText = display.textContent;
 let digitButtons = document.querySelectorAll(".digit");
 let operatorButtons = document.querySelectorAll(".operator");
 let equalButton = document.querySelector("#btn-equal");
 let clearButton = document.querySelector("#btn-clear");
-let result;
+
 
 digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
 operatorButtons.forEach(item => item.addEventListener("click", function (e){operationSelection(e)}));
