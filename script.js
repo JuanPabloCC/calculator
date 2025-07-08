@@ -84,4 +84,5 @@ let clearButton = document.querySelector("#btn-clear");
 digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
 operatorButtons.forEach(item => item.addEventListener("click", function (e){operationSelection(e)}));
 equalButton.addEventListener("click", equal);
+clearButton.addEventListener("click", clear);
 
