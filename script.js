@@ -41,12 +41,11 @@ function updateDisplayText(e) {
 
 function operationSelection(e) {
     operator = e.target.textContent;
-
-    if (displayText.split(operator).length === 1) {
+    if (displayText.toString().split(operator).length === 1) {
         num1 = +display.textContent;
     }
 
-    else if (displayText.split(operator).length > 1) {
+    else if (displayText.toString().split(operator).length > 1) {
         num1 = +displayText.split(operator)[0];
         num2 = +displayText.split(operator)[1];
         result = operate(num1, num2, operator);
