@@ -40,8 +40,20 @@ function updateDisplayText(e) {
 }
 
 function operationSelection(e) {
-    num1 = +display.textContent;
     operator = e.target.textContent;
+
+    if (displayText.split(operator).length === 1) {
+        num1 = +display.textContent;
+    }
+
+    else if (displayText.split(operator).length > 1) {
+        num1 = +displayText.split(operator)[0];
+        num2 = +displayText.split(operator)[1];
+        result = operate(num1, num2, operator);
+        displayText = result;
+        display.textContent = displayText;
+    }
+
     displayText += operator;
     display.textContent = displayText;
     num1Selected = true;
@@ -49,12 +61,8 @@ function operationSelection(e) {
 }
 
 function equal () {
-    console.log(num1);
-    console.log(operator);
     num2 = +displayText.split(operator)[1];
-    console.log(num2);
     result = operate(num1, num2, operator);
-    console.log(result);
     displayText = result;
     display.textContent = displayText;
 }
@@ -80,6 +88,7 @@ let digitButtons = document.querySelectorAll(".digit");
 let operatorButtons = document.querySelectorAll(".operator");
 let equalButton = document.querySelector("#btn-equal");
 let clearButton = document.querySelector("#btn-clear");
+let result;
 
 digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
 operatorButtons.forEach(item => item.addEventListener("click", function (e){operationSelection(e)}));
