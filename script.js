@@ -11,12 +11,7 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-    if (num2 === 0) {
-        return "You can't divide by zero!"
-    }
-    else {
-        return Math.round((num1 / num2) * 10)/10
-    }
+    return Math.round((num1 / num2) * 10)/10
 }
 
 /**
@@ -73,9 +68,15 @@ function equal () {
     operator = calcHistory[1];
     result = operate(num1, num2, operator);
     // We need to set num as the result in case the user wants to continue with further calculations
-    num = result;
+    // In case that result is equal to Infinity E.g. division by zero, num will be equal to zero
+    if (result === Infinity) {
+        num = 0;
+        display.textContent = "Can't divide by zero :(";
+    } else {
+        num = result;
+        display.textContent = result;
+    }
     calcHistory = [];
-    display.textContent = result;
     displayText= "";
 }
 
