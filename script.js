@@ -14,6 +14,13 @@ function divide(num1, num2) {
     return num1 / num2
 }
 
+/**
+ * Returns an arimethic operation on num1 and num2 based on given operator
+ * @param {*} num1 - first argument.
+ * @param {*} num2 - second argument.
+ * @param {*} operator - operator.
+ * @returns 
+ */
 function operate(num1, num2, operator) {
 
     switch(operator) {
@@ -30,6 +37,10 @@ function operate(num1, num2, operator) {
     }
 }
 
+/**
+ * Updates calculator display.
+ * @param {*} e - event information.
+ */
 function updateDisplayText(e) {
     let digitButtonText = e.target.textContent;
     displayText += digitButtonText;
@@ -44,6 +55,9 @@ function clear () {
     numHistory = [];
 }
 
+/**
+ * When the equal button is pressed, calculates the result of the operation given to the calculator
+ */
 function equal () {
     numHistory.push(+display.textContent);
     num1 = numHistory[0];
@@ -58,10 +72,8 @@ function equal () {
 }
 
 function operationSelection(e) {
-    
     numHistory.push(+num);
     num = "";
-
     if (numHistory.length === 3) {
         num1 = numHistory[0];
         num2 = numHistory[2];
