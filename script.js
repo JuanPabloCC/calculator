@@ -48,47 +48,55 @@ function updateDisplayText(e) {
     display.textContent = displayText;
 }
 
+/**
+ * When the clear button is pressed, clears calculator's display and all variables.
+ */
 function clear () {
     display.textContent = "";
     displayText = "";
     num = "";
-    numHistory = [];
+    calcHistory = [];
 }
 
 /**
  * When the equal button is pressed, calculates the result of the operation given to the calculator
  */
 function equal () {
-    numHistory.push(+display.textContent);
-    num1 = numHistory[0];
-    num2 = numHistory[2];
-    operator = numHistory[1];
+    calcHistory.push(+display.textContent);
+    num1 = calcHistory[0];
+    num2 = calcHistory[2];
+    operator = calcHistory[1];
     result = operate(num1, num2, operator);
+    // We need to set num as the result in case the user wants to continue with further calculations
     num = result;
-    numHistory = [];
+    calcHistory = [];
     display.textContent = result;
     displayText= "";
-    console.log(numHistory);
 }
 
 function operationSelection(e) {
-    numHistory.push(+num);
+    calcHistory.push(+num);
     num = "";
-    if (numHistory.length === 3) {
-        num1 = numHistory[0];
-        num2 = numHistory[2];
-        operator = numHistory[1];
+    displayText = "";
+    // If there's 3 elements in calcHistory, it means that the user
+    // has input two numbers and one operator in this case the calculator
+    // will make an operation since it is the way it's needed
+    if (calcHistory.length === 3) {
+        num1 = calcHistory[0];
+        num2 = calcHistory[2];
+        operator = calcHistory[1];
         result = operate(num1, num2, operator);
-        numHistory = [];
-        numHistory.push(result);
+        // Once the calculation is done calcHistory is reseted and
+        // the current result is appended
+        calcHistory = [];
+        calcHistory.push(result);
     }
-    numHistory.push(e.target.textContent);
-    display.textContent = numHistory[0];
-    displayText= "";
-    console.log(numHistory);
+    // Appends the operator to calcHistory
+    calcHistory.push(e.target.textContent);
+    display.textContent = calcHistory[0];
 }
 
-let numHistory = [];
+let calcHistory = [];
 let num = "";
 let result;
 let num1;
