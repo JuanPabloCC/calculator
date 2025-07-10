@@ -33,7 +33,7 @@ function operate(num1, num2, operator) {
         case "/":
             return divide(num1, num2);
         default:
-            return "Not a valid operator!"
+            return undefined
     }
 }
 
@@ -51,7 +51,7 @@ function updateDisplayText(e) {
 /**
  * When the clear button is pressed, clears calculator's display and all variables.
  */
-function clear () {
+function clear() {
     display.textContent = "";
     displayText = "";
     num = "";
@@ -61,8 +61,12 @@ function clear () {
 /**
  * When the equal button is pressed, calculates the result of the operation given to the calculator
  */
-function equal () {
+function equal(e) {
     calcHistory.push(+display.textContent);
+    calcHistory.push(e.target.textContent);
+    if (calcHistory.length === 1) {
+
+    }
     num1 = calcHistory[0];
     num2 = calcHistory[2];
     operator = calcHistory[1];
@@ -72,7 +76,11 @@ function equal () {
     if (result === Infinity) {
         num = 0;
         display.textContent = "Can't divide by zero :(";
-    } else {
+    } else if (result === undefined) {
+        num = 0;
+        display.textContent = "Non valid operation :(";
+    }
+    else {
         num = result;
         display.textContent = result;
     }
@@ -84,6 +92,7 @@ function operationSelection(e) {
     calcHistory.push(+num);
     num = "";
     displayText = "";
+    display.textContent = displayText;
     // If there's 3 elements in calcHistory, it means that the user
     // has input two numbers and one operator in this case the calculator
     // will make an operation since it is the way it's needed
@@ -92,14 +101,22 @@ function operationSelection(e) {
         num2 = calcHistory[2];
         operator = calcHistory[1];
         result = operate(num1, num2, operator);
-        // Once the calculation is done calcHistory is reseted and
-        // the current result is appended
+        // We need to reset the calcHistory since it is designed to do only two-operands operations
+        // We also need to push the current result to calcHistory in case the user wants to continue operations
         calcHistory = [];
-        calcHistory.push(result);
+        // if the result is Infinity E.g. division by zero, we will push zero
+        // otherwise we will push the actual result to calcHistory
+        if (result === Infinity) {
+            calcHistory.push(0);
+            display.textContent = "Can't divide by zero :(";
+        } else {
+            calcHistory.push(result);
+            display.textContent = calcHistory[0];
+        }
     }
     // Appends the operator to calcHistory
     calcHistory.push(e.target.textContent);
-    display.textContent = calcHistory[0];
+    
 }
 
 let calcHistory = [];
@@ -116,8 +133,8 @@ let equalButton = document.querySelector("#btn-equal");
 let clearButton = document.querySelector("#btn-clear");
 
 
-digitButtons.forEach(item => item.addEventListener("click", function (e) {updateDisplayText(e)}));
-operatorButtons.forEach(item => item.addEventListener("click", function (e){operationSelection(e)}));
-equalButton.addEventListener("click", equal);
+digitButtons.forEach(item => item.addEventListener("click", function(e) {updateDisplayText(e)}));
+operatorButtons.forEach(item => item.addEventListener("click", function(e) {operationSelection(e)}));
+equalButton.addEventListener("click", function(e) {equal(e)});
 clearButton.addEventListener("click", clear);
 
