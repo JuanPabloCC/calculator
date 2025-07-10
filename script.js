@@ -37,40 +37,65 @@ function operate(num1, num2, operator) {
     }
 }
 
-function updateDisplayText(e) {
-    let digit = e.target.textContent;
-    display.textContent += digit;
-}
-
 function clear() {
     calcHistory = [];
     operatorHistory = [];
     num1 = "";
     num2 = "";
+    num = "";
     result = "";
     operator = "";
     display.textContent = "";
 }
 
+
+
+function updateDisplayText(e) {
+    if (result) {
+        display.textContent = "";
+        result = "";
+        calcHistory = [];
+        operatorHistory = [];
+    }
+    let digit = e.target.textContent;
+    display.textContent += digit;
+    num += digit;
+}
+
 function equal(e) {
-    calcHistory.push(+display.textContent);
-    num1 = calcHistory[0];
-    num2 = calcHistory[1];
-    operator = operatorHistory[0];
+    calcHistory.push(+num);
+    num1 = calcHistory.at(-2);
+    num2 = calcHistory.at(-1);
+    operator = operatorHistory.at(-1);
     result = operate(num1, num2, operator);
     display.textContent = result;
+    calcHistory = [];
+    calcHistory.push(result);
+    num = "";
 }
 
 function operationSelection(e) {
-    calcHistory.push(+display.textContent);
+    if (result) {
+        result = "";
+    } else {
+        calcHistory.push(+num);
+    }
     operatorHistory.push(e.target.textContent);
+    num = "";
     display.textContent = "";
-    console.log(calcHistory);
-    console.log(operatorHistory);
+    if (calcHistory.length > 1){
+        num1 = calcHistory.at(-2);
+        num2 = calcHistory.at(-1);
+        operator = operatorHistory.at(-2);
+        result = operate(num1, num2, operator);
+        calcHistory.push(result);
+        display.textContent = result;
+    }
 }
 
 let calcHistory = [];
 let operatorHistory = [];
+let num = "";
 let result;
 let num1;
 let num2;
