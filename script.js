@@ -48,14 +48,10 @@ function clear() {
     display.textContent = "";
 }
 
-
-
 function updateDisplayText(e) {
     if (result) {
         display.textContent = "";
         result = "";
-        calcHistory = [];
-        operatorHistory = [];
     }
     let digit = e.target.textContent;
     display.textContent += digit;
@@ -63,18 +59,24 @@ function updateDisplayText(e) {
 }
 
 function equal(e) {
-    calcHistory.push(+num);
-    num1 = calcHistory.at(-2);
-    num2 = calcHistory.at(-1);
-    operator = operatorHistory.at(-1);
-    result = operate(num1, num2, operator);
-    display.textContent = result;
-    calcHistory = [];
-    calcHistory.push(result);
-    num = "";
+    console.log(calcHistory);
+    if (calcHistory.length >= 1){
+        calcHistory.push(+num);
+        num1 = calcHistory.at(-2);
+        num2 = calcHistory.at(-1);
+        operator = operatorHistory.at(-1);
+        result = operate(num1, num2, operator);
+        display.textContent = result;
+        calcHistory = [];
+        calcHistory.push(result);
+        num = "";}
+    else {
+        return
+    }
 }
 
 function operationSelection(e) {
+    
     if (result) {
         result = "";
     } else {
@@ -105,7 +107,6 @@ let digitButtons = document.querySelectorAll(".digit");
 let operatorButtons = document.querySelectorAll(".operator");
 let equalButton = document.querySelector("#btn-equal");
 let clearButton = document.querySelector("#btn-clear");
-
 
 digitButtons.forEach(item => item.addEventListener("click", function(e) {updateDisplayText(e)}));
 operatorButtons.forEach(item => item.addEventListener("click", function(e) {operationSelection(e)}));
