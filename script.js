@@ -48,6 +48,16 @@ function clear() {
     display.textContent = "";
 }
 
+function divisionByZero() {
+    display.textContent = "No division by zero!";
+    calcHistory = [];
+    operatorHistory = [];
+    num1 = "";
+    num2 = "";
+    num = "";
+    operator = "";
+}
+
 function updateDisplayText(e) {
     if (result) {
         display.textContent = "";
@@ -71,10 +81,15 @@ function equal(e) {
         num2 = calcHistory.at(-1);
         operator = operatorHistory.at(-1);
         result = operate(num1, num2, operator);
-        display.textContent = result;
-        calcHistory = [];
-        calcHistory.push(result);
-        num = "";}
+        if (result === Infinity) {
+            divisionByZero();
+        } else {
+            display.textContent = result;
+            calcHistory = [];
+            calcHistory.push(result);
+            num = "";
+        }
+    }
     else {
         return
     }
@@ -94,8 +109,12 @@ function operationSelection(e) {
         num2 = calcHistory.at(-1);
         operator = operatorHistory.at(-2);
         intermediateResult = operate(num1, num2, operator);
-        calcHistory.push(intermediateResult);
-        display.textContent = intermediateResult;
+        if (intermediateResult === Infinity) {
+            divisionByZero();
+        } else {
+            calcHistory.push(intermediateResult);
+            display.textContent = intermediateResult;
+        }
     }
 }
 
