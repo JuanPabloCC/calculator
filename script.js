@@ -11,7 +11,7 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-    return Math.round((num1 / num2) * 10)/10
+    return Math.round((num1 / num2) * 100)/100
 }
 
 /**
@@ -55,6 +55,7 @@ function divisionByZero() {
     num1 = "";
     num2 = "";
     num = "";
+    userInput = false;
     operator = "";
 }
 
@@ -72,6 +73,7 @@ function updateDisplayText(e) {
     let digit = e.target.textContent;
     display.textContent += digit;
     num += digit;
+    userInput = true;
 }
 
 function equal(e) {
@@ -88,6 +90,7 @@ function equal(e) {
             calcHistory = [];
             calcHistory.push(result);
             num = "";
+            userInput = false;
         }
     }
     else {
@@ -99,10 +102,13 @@ function operationSelection(e) {
     if (result) {
         result = "";
     } else {
-        calcHistory.push(+num);
+        if (userInput){
+            calcHistory.push(+num);
+        }
     }
     operatorHistory.push(e.target.textContent);
     num = "";
+    userInput = false;
     display.textContent = "";
     if (calcHistory.length > 1){
         num1 = calcHistory.at(-2);
@@ -120,6 +126,7 @@ function operationSelection(e) {
 
 let calcHistory = [];
 let operatorHistory = [];
+let userInput = false;
 let num = "";
 let result;
 let intermediateResult;
