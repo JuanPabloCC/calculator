@@ -43,6 +43,7 @@ function clear() {
     num1 = "";
     num2 = "";
     num = "";
+    userInput = false;
     result = "";
     operator = "";
     display.textContent = "";
