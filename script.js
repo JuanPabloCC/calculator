@@ -60,7 +60,7 @@ function divisionByZero() {
     operator = "";
 }
 
-function updateDisplayText(e) {
+function updateDisplayText(digit) {
     if (result) {
         display.textContent = "";
         result = "";
@@ -71,13 +71,26 @@ function updateDisplayText(e) {
         display.textContent = "";
         intermediateResult = "";
     }
-    let digit = e.target.textContent;
     display.textContent += digit;
     num += digit;
     userInput = true;
 }
 
-function equal(e) {
+function keyPressed(key) {
+    if (numbers.includes(+key)) {
+        updateDisplayText(key);
+    } else if (operators.includes(key)) {
+        operationSelection(key);
+    } else if (key === "="){
+        equal();
+    } else if (key === "Delete"){
+        clear();
+    } else {
+        return
+    }
+}
+
+function equal() {
     if (calcHistory.length >= 1){
         calcHistory.push(+num);
         num1 = calcHistory.at(-2);
@@ -99,7 +112,7 @@ function equal(e) {
     }
 }
 
-function operationSelection(e) {
+function operationSelection(operator) {
     if (result) {
         result = "";
     } else {
@@ -107,7 +120,7 @@ function operationSelection(e) {
             calcHistory.push(+num);
         }
     }
-    operatorHistory.push(e.target.textContent);
+    operatorHistory.push(operator);
     num = "";
     userInput = false;
     display.textContent = "";
@@ -125,22 +138,28 @@ function operationSelection(e) {
     }
 }
 
+
+
 let calcHistory = [];
 let operatorHistory = [];
 let userInput = false;
+let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let operators = ["+", "-", "*", "/"];
 let num = "";
 let result;
 let intermediateResult;
 let num1;
 let num2;
 let operator;
+let buttons = document.querySelectorAll("button");
 let display = document.querySelector("#calc-display-text");
 let digitButtons = document.querySelectorAll(".digit");
 let operatorButtons = document.querySelectorAll(".operator");
 let equalButton = document.querySelector("#btn-equal");
 let clearButton = document.querySelector("#btn-clear");
 
-digitButtons.forEach(item => item.addEventListener("click", function(e) {updateDisplayText(e)}));
-operatorButtons.forEach(item => item.addEventListener("click", function(e) {operationSelection(e)}));
-equalButton.addEventListener("click", function(e) {equal(e)});
+document.addEventListener("keydown", function(e) {keyPressed(e.key)});
+digitButtons.forEach(item => item.addEventListener("click", function(e) {updateDisplayText(e.target.textContent)}));
+operatorButtons.forEach(item => item.addEventListener("click", function(e) {operationSelection(e.target.textContent)}));
+equalButton.addEventListener("click", equal);
 clearButton.addEventListener("click", clear);
