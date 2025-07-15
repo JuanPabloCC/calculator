@@ -18,7 +18,7 @@ button {
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 400px;
+    /* height: 400px; */
 }
 
 #calc-display {
@@ -39,6 +39,7 @@ button {
 #digit-btn-panel {
     display: flex;
     flex-flow: row wrap;
+    flex: 1;
 }
 
 #special-btn-panel {
@@ -59,4 +60,14 @@ button {
 .operator {
     flex: 1;
     background-color: lightgray;
+}
+
+.digit {
+    width: 33%;
+    flex-grow: 1;
+}
+
+.special {
+    width: 33%;
+    flex-grow: 1;
 }
