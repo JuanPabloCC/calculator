@@ -8,32 +8,42 @@ body {
 
 button {
     width: 100px;
-    height: 50px;
     font-size: large;
     font-family:"Orbitron", sans-serif;
+    border: solid 1px rgb(173, 172, 172);
 }
 
 #main-calc-body {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 400px;
+    height: 400px;
 }
 
 #calc-display {
-    border: solid 1px black;
+    border: solid 1px rgb(173, 172, 172);
     border-radius: 5px 5px 0px 0px;
     justify-content: center;
     align-items: center;
     text-align: right;
-    height: 75px;
+    height: 100px;
     padding: 5px;
 }
 
 #calc-btn-panel {
     display: flex;
-    flex-wrap: wrap;
+    height: 300px;
+}
+
+#digit-btn-panel {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#special-btn-panel {
+    display: flex;
+    flex-direction: column;
 }
 
 #btn-clear {
@@ -46,5 +56,7 @@ button {
     color: white;
 }
 
-
-
+.operator {
+    flex: 1;
+    background-color: lightgray;
+}
