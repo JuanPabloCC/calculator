@@ -14,13 +14,6 @@ function divide(num1, num2) {
     return Math.round((num1 / num2) * 100)/100
 }
 
-/**
- * Returns an arimethic operation on num1 and num2 based on given operator
- * @param {*} num1 - first argument.
- * @param {*} num2 - second argument.
- * @param {*} operator - operator.
- * @returns 
- */
 function operate(num1, num2, operator) {
 
     switch(operator) {
@@ -33,31 +26,28 @@ function operate(num1, num2, operator) {
         case "/":
             return divide(num1, num2);
         default:
-            return undefined
+            throw new Error(`Non valid operator: ${operator}`);
     }
 }
 
-function clear() {
+function resetState() {
     calcHistory = [];
     operatorHistory = [];
     num1 = "";
     num2 = "";
     num = "";
     userInput = false;
-    result = "";
     operator = "";
+}
+
+function clear() {
+    resetState();
     display.textContent = "";
 }
 
 function divisionByZero() {
+    resetState();
     display.textContent = "No division by zero!";
-    calcHistory = [];
-    operatorHistory = [];
-    num1 = "";
-    num2 = "";
-    num = "";
-    userInput = false;
-    operator = "";
 }
 
 function updateDisplayText(digit) {
@@ -138,18 +128,16 @@ function operationSelection(operator) {
     }
 }
 
-
-
-let calcHistory = [];
-let operatorHistory = [];
-let userInput = false;
+let calcHistory = []; // Operands and results history
+let operatorHistory = []; // Operator history
+let userInput = false; // This flag determines if the user has input a number or not
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let operators = ["+", "-", "*", "/"];
-let num = "";
-let result;
-let intermediateResult;
-let num1;
-let num2;
+let num = ""; // Current input number
+let result; // Final result after pressing "="
+let intermediateResult; // Partial result. Happens when the user concatenates several operations
+let num1; // First operand
+let num2; // Second operand
 let operator;
 let buttons = document.querySelectorAll("button");
 let display = document.querySelector("#calc-display-text");
